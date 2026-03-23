@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-DadJokes-353749c5-cdf6-426c-80de-b1da134eaf0b</UserSecretsId>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "GuAoPYmiK3We0Zph8phHZdtNcYSP6eW3dYz2ABGbOOU=",
+  "Hash": "bPVbRSRmbqb7DoRJIjRnbDe6zMt7aMQNLFEPlL7jqkU=",
   "Source": "DadJokes",
   "BasePath": "_content/DadJokes",
   "Mode": "Default",
@@ -1071,6 +1071,23 @@
       "OriginalItemSpec": "C:\\Users\\abelg\\source\\repos\\DadJokes\\DadJokes\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\DadJokes.bundle.scp.css"
     },
     {
+      "Identity": "C:\\Users\\abelg\\source\\repos\\DadJokes\\DadJokes\\wwwroot\\438.gif",
+      "SourceId": "DadJokes",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\abelg\\source\\repos\\DadJokes\\DadJokes\\wwwroot\\",
+      "BasePath": "_content/DadJokes",
+      "RelativePath": "438.gif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\438.gif"
+    },
+    {
       "Identity": "C:\\Users\\abelg\\source\\repos\\DadJokes\\DadJokes\\wwwroot\\css\\site.css",
       "SourceId": "DadJokes",
       "SourceType": "Discovered",
@@ -2089,6 +2106,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\abelg\\source\\repos\\DadJokes\\DadJokes\\wwwroot\\wallpaper.png",
+      "SourceId": "DadJokes",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\abelg\\source\\repos\\DadJokes\\DadJokes\\wwwroot\\",
+      "BasePath": "_content/DadJokes",
+      "RelativePath": "wallpaper.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\wallpaper.png"
     }
   ]
 }

@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\DadJokes.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\abelg\\source\\repos\\DadJokes\\DadJokes\\wwwroot\\438.gif",
+      "PackagePath": "staticwebassets\\438.gif"
+    },
+    {
       "Id": "C:\\Users\\abelg\\source\\repos\\DadJokes\\DadJokes\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -243,6 +247,10 @@
     {
       "Id": "C:\\Users\\abelg\\source\\repos\\DadJokes\\DadJokes\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\abelg\\source\\repos\\DadJokes\\DadJokes\\wwwroot\\wallpaper.png",
+      "PackagePath": "staticwebassets\\wallpaper.png"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.DadJokes.Microsoft.AspNetCore.StaticWebAssets.props",

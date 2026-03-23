@@ -9,6 +9,7 @@ using DadJokes.Data;
 using DadJokes.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace DadJokes.Controllers
 {
@@ -28,9 +29,13 @@ namespace DadJokes.Controllers
         // GET: Jokes
         public async Task<IActionResult> Index()
         {
-              return _context.Joke != null ? 
-                          View(await _context.Joke.ToListAsync()) : //returns list
-                          Problem("Entity set 'ApplicationDbContext.Joke'  is null.");
+            var jokesWithVotes = await _context.Joke
+                .Include(j => j.Votes)
+                .ToListAsync();
+
+            return _context.Joke != null ?
+                        View(jokesWithVotes) : //returns list
+                        Problem("Entity set 'ApplicationDbContext.Joke'  is null.");
         }
 
         // GET: Jokes/SearchJokes
@@ -200,13 +205,24 @@ namespace DadJokes.Controllers
         [Authorize]
         public async Task<IActionResult> Upvote(int id)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var joke = await _context.Joke.FindAsync(id);
-            if (joke == null) return NotFound();
+            var existingVote = await _context.Votes
+                .FirstOrDefaultAsync(v => v.JokeId == id && v.UserId == userId);
 
-            joke.Upvote += 1;
+            if (existingVote == null)
+            {
+                _context.Votes.Add(new Vote { JokeId = id, UserId = userId, Value = 1 });
+            }
+            else if (existingVote.Value == 1)
+            {
+               _context.Votes.Remove(existingVote);
+            }
+            else{
+                existingVote.Value += 1;
+            }
+
             await _context.SaveChangesAsync();
-
             return RedirectToAction(nameof(Index));
 
         }
@@ -216,14 +232,26 @@ namespace DadJokes.Controllers
         public async Task<IActionResult> Downvote(int id)
         {
 
-            var joke = await _context.Joke.FindAsync(id);
-            if(joke == null) return NotFound();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            joke.Downvote += 1;
+            var existingVote = await _context.Votes
+                .FirstOrDefaultAsync(v => v.JokeId == id && v.UserId == userId);
+
+            if (existingVote == null)
+            {
+                _context.Votes.Add(new Vote { JokeId = id, UserId = userId, Value = -1 });
+            }
+            else if (existingVote.Value == -1)
+            {
+                _context.Votes.Remove(existingVote);
+            }
+            else
+            {
+                existingVote.Value -= 1;
+            }
+
             await _context.SaveChangesAsync();
-
             return RedirectToAction(nameof(Index));
-
         }
 
         private bool JokeExists(int id)

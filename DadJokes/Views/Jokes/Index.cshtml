@@ -5,10 +5,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Riddle me this</h1>
+<h1 class="details-box2">Riddle me this</h1>
 
-<p>
-    <h1><a asp-action="Create"> ➕ </a></h1>
+<p style="color:coral">
+    <h1><a asp-action="Create"> + </a></h1>
 </p>
 <table class="table table-hover table-striped custom-table text-white">
     <thead class="thead-dark">
@@ -20,6 +20,8 @@
     <tbody>
         @foreach (var item in Model)
         {
+           
+
             <tr>
                 <td>
                     <span class="question-text">@Html.DisplayFor(modelItem => item.Question)</span>
@@ -37,10 +39,14 @@
 
                     }
 
-                    <div class="vote-counts">
-                        <span class="text-white ml-2">⬆️ @item.Upvote</span>
-                        <span class="text-white ml-2">⬇️ @item.Downvote</span>
-                    </div>
+                    <td>
+                    <!-- Display the Net Score -->
+                    <a class="text-light">Total Votes: </a>
+                    <strong class=" @(item.Votes.Sum(v => v.Value) >= 0 ? "text-success" : "text-danger")">
+                            @item.Votes.Sum(v => v.Value)
+                    </strong>
+                    </td>
+
                 </td>
             </tr>
         }
