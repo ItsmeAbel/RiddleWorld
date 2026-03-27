@@ -5,12 +5,57 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    color: #e6f1ff;
-    line-height: 1.6;
-    height: 100%;
-    background: linear-gradient( 135deg, #0f172a, #020617, #0a2540, #001a33 );
+    min-height: 100vh;
+    background-color: #e6f1ff; /* The dark base */
+    /* This creates a deep, dark adventurous base */
+    background-image: url('https://www.transparenttextures.com/patterns/foggy-birds.png');
+    background-attachment: fixed;
+    background: linear-gradient(-45deg, #020617, #0f172a, #1e293b, #020617);
     background-size: 400% 400%;
-    animation: gradientFlow 20s ease infinite;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* Apply both animations: one for color shift, one for "breathing" */
+    animation: gradientShift 15s ease infinite, breatheEffect 8s ease-in-out infinite;
+    background-attachment: fixed; /* Keeps the background still while content scrolls */
+    color: #e6f1ff; /* Ensures all text is readable against the dark background */
+}
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        background: linear-gradient(-45deg, #020617, #0f172a, #1e293b, #020617);
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+    }
+
+/* 1. The Color Shift */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* 2. The Pulsing Glow */
+@keyframes breatheEffect {
+    0%, 100% {
+        filter: brightness(100%);
+    }
+
+    50% {
+        filter: brightness(125%);
+    }
 }
 
 @keyframes gradientFlow {
@@ -65,7 +110,50 @@ header {
         font-weight: 600;
     }
 
+/* =====================
+   navbar
+   ===================== */
+/* Deep Dark Riddle Theme */
+.bg-dark-riddle {
+    background-color: #0d1117; /* Very deep charcoal/black */
+}
 
+.navbar-brand {
+    letter-spacing: 2px;
+    font-size: 1.4rem;
+}
+
+/* Minimal Hover Effect */
+.hover-underline {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+    .hover-underline::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 5px;
+        left: 10%;
+        background-color: #0d6efd; /* Your primary color */
+        transition: width 0.3s ease;
+    }
+
+    .hover-underline:hover::after {
+        width: 80%;
+    }
+
+    .hover-underline:hover {
+        color: #fff !important;
+    }
+
+
+/* Subtle Italic for Search */
+.italic {
+    font-style: italic;
+    font-size: 0.95rem;
+}
 
 /* =====================
    Content Area
@@ -73,9 +161,31 @@ header {
 main {
     max-width: 1200px;
     margin: 2rem auto;
-    padding: 0 2rem;
+    padding: 0 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+.mist-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/foggy-birds.png');
+    opacity: 0.8;
+    z-index: -1; /* Sits behind everything except the body background */
+    animation: mistDrift 60s linear infinite;
 }
 
+@keyframes mistDrift {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 1000px 1000px;
+    }
+}
 /* =====================
    Buttons
    ===================== */
@@ -114,7 +224,6 @@ footer {
 .custom-table {
     background: rgba(29, 53, 87, 0.85);
     border-radius: 12px;
-    overflow: hidden;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
@@ -274,10 +383,14 @@ footer {
     }
 
 .typewriter {
+    background-color: rgba(173, 216, 230, 0.4);
+    /* Smooths out the corners for a modern feel */
+    border-radius: 8px;
     justify-content: center; /*horizontal center*/
-    white-space: nowrap;
+    white-space: normal;
+    text-align: center;
     overflow: hidden;
-    display:flex;
+    display: flex;
     font-family: 'Courier New', monospace;
     font-size: 1.2rem;
     visibility: hidden; /* start invisible */
@@ -286,7 +399,8 @@ footer {
 .homepage-intro p {
     margin: 0.5rem 0;
     background-color: aquamarine;
-    color:black;
+    color: black;
+    font-size: clamp(1.2rem, 4vw, 2rem);
 }
 
 .details-box {
@@ -305,6 +419,120 @@ footer {
     -webkit-text-fill-color: transparent;
     margin-bottom: 30px;
 }
-/*background wallpaper*/
+/* Riddle answer reveal animation */
+
+.riddle-answer {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #ffe066;
+    opacity: 0;
+    transform: scale(0.7);
+    animation: answerPop 0.6s ease-out forwards;
+    text-shadow: 0 0 8px rgba(255, 224, 102, 0.7);
+}
+
+/* Pop animation */
+@keyframes answerPop {
+
+    0% {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/*responsivness*/
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+
+    .navbar-nav .nav-link {
+        margin: 4px 0;
+        text-align: center;
+    }
+
+    .navbar-nav .nav-item .btn-login {
+        margin-left: 0;
+        margin-top: 8px;
+    }
+}
+
+/* =====================
+   Mobile Responsive
+   ===================== */
+
+@media (max-width: 768px) {
+
+    header {
+        padding: 1rem;
+        text-align: center;
+    }
+
+        header h1 {
+            font-size: 1.4rem;
+        }
+
+    .custom-table td {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
+
+    .vote-btn {
+        font-size: 1rem;
+    }
+
+    button, .btn {
+        width: 100%;
+        margin-top: 6px;
+    }
+
+    .details-box {
+        padding: 15px;
+    }
+}
+/*riddle table responsive view*/
+.riddle-card {
+    background: rgba(255, 255, 255, 0.6); /* Your Light Blue/White Misty look */
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+    .riddle-card:hover {
+        transform: translateY(-3px);
+        background: rgba(255, 255, 255, 0.8);
+    }
+
+.question-label {
+    color: #457b9d;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.question-text {
+    color: #1d3557;
+}
+
+/* Fixes for mobile buttons */
+@media (max-width: 768px) {
+    .btn-sm {
+        padding: 10px 15px; /* Bigger tap targets for fingers */
+    }
+
+}
 
 

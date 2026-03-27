@@ -27,11 +27,21 @@ namespace DadJokes.Controllers
         }
         
         // GET: Jokes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index( int page = 1)
         {
+            int pageSize = 10;
+
             var jokesWithVotes = await _context.Joke
-                .Include(j => j.Votes)
-                .ToListAsync();
+            .Include(j => j.Votes)
+            .OrderByDescending(j => j.UserId)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+            ViewBag.Page = page;
+            //var jokesWithVotes = await _context.Joke
+               // .Include(j => j.Votes)
+                //.ToListAsync();
 
             return _context.Joke != null ?
                         View(jokesWithVotes) : //returns list

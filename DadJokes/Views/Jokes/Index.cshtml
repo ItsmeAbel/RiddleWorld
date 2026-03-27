@@ -5,51 +5,65 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="details-box2">Riddle me this</h1>
+<h1 class="details-box2 text-center">Riddle me this</h1>
 
-<p style="color:coral">
-    <h1><a asp-action="Create"> + </a></h1>
-</p>
-<table class="table table-hover table-striped custom-table text-white">
-    <thead class="thead-dark">
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Question)</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="container">
+    <div class="my-4 text-center text-md-start">
+        <a asp-action="Create" class="btn btn-adventure px-4 py-2">
+            <i class="bi bi-plus-lg"></i> Add New Riddle
+        </a>
+    </div>
+
+    <div class="riddle-container">
         @foreach (var item in Model)
         {
-           
+            <div class="riddle-card mb-4 p-4">
+                <div class="row align-items-center">
 
-            <tr>
-                <td>
-                    <span class="question-text">@Html.DisplayFor(modelItem => item.Question)</span>
-                    <div class="vote-buttons">
-                        <a asp-action="Upvote" asp-route-id="@item.Id" class="btn btn-success btn-sm">⬆️</a>
-                        <a asp-action="Downvote" asp-route-id="@item.Id" class="btn btn-danger btn-sm">⬇️</a>
+                    <div class="col-12 col-md-7 mb-3 mb-md-0">
+                        <span class="question-label text-uppercase small d-block mb-1">Question</span>
+                        <span class="question-text fw-bold fs-5">@item.Question</span>
+
+                        <div class="vote-buttons mt-3 d-flex align-items-center gap-2">
+                            <a asp-action="Upvote" asp-route-id="@item.Id" class="btn btn-outline-success btn-sm">⬆️</a>
+                            <a asp-action="Downvote" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">⬇️</a>
+                            <div class="ms-2">
+                                <span class="small text-muted">Score: </span>
+                                <strong class="@(item.Votes.Sum(v => v.Value) >= 0 ? "text-success" : "text-danger")">
+                                    @item.Votes.Sum(v => v.Value)
+                                </strong>
+                            </div>
+                        </div>
                     </div>
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Show Answer</a>
-                    @if (item.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
-                    {
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
 
-                    }
+                    <div class="col-12 col-md-5 text-md-end">
+                        <div class="d-flex flex-wrap gap-2 justify-content-start justify-content-md-end">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm px-3">Show Answer</a>
 
-                    <td>
-                    <!-- Display the Net Score -->
-                    <a class="text-light">Total Votes: </a>
-                    <strong class=" @(item.Votes.Sum(v => v.Value) >= 0 ? "text-success" : "text-danger")">
-                            @item.Votes.Sum(v => v.Value)
-                    </strong>
-                    </td>
+                            @if (item.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
+                            {
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                            }
+                        </div>
+                    </div>
 
-                </td>
-            </tr>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
 
+    <div class="text-center mt-5 mb-4">
+        <a class="btn btn-primary shadow-sm"
+           asp-action="Index"
+           asp-route-page="@(ViewBag.Page - 1)">
+            <i class="bi bi-arrow-left"></i> Previous
+        </a>
+        <span class="mx-3 fw-bold fs-5">Page @ViewBag.Page</span>
+        <a class="btn btn-primary shadow-sm"
+           asp-action="Index"
+           asp-route-page="@(ViewBag.Page + 1)">
+            Next <i class="bi bi-arrow-right"></i>
+        </a>
+    </div>
+</div>
