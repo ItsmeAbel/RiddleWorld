@@ -1,38 +1,51 @@
 ﻿@model DadJokes.Models.Joke
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "New Riddle";
 }
 
-<h1>Create</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-lg border-0 rounded-lg p-4 bg-light">
+                <div class="card-header bg-transparent border-0 text-center">
+                    <h2 class="display-6">📜 Post a New Riddle</h2>
+                    <p class="text-muted">Challenge the world with your wit.</p>
+                </div>
+                <hr />
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
 
-<h4>Joke</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Question" class="control-label"></label>
-                <input asp-for="Question" class="form-control" />
-                <span asp-validation-for="Question" class="text-danger"></span>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Question" class="form-control border-primary" placeholder="The Riddle..." />
+                            <label asp-for="Question">The Riddle (The Puzzle)</label>
+                            <span asp-validation-for="Question" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mb-4">
+                            <input asp-for="Answer" class="form-control border-primary" placeholder="The Answer..." />
+                            <label asp-for="Answer">The Answer (The Secret)</label>
+                            <span asp-validation-for="Answer" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+                                <i class="bi bi-plus-circle"></i> Create Riddle
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm border-0">
+                                Cancel and Go Back
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Answer" class="control-label"></label>
-                <input asp-for="Answer" class="form-control" />
-                <span asp-validation-for="Answer" class="text-danger"></span>
-            </div>
-            
-                <button type="submit" class="btn btn-primary">Create</button>
-            
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

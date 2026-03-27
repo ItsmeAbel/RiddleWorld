@@ -1,23 +1,28 @@
-﻿@model IEnumerable<DadJokes.Models.Joke>
+﻿<div class="search-section mt-5">
+    <h2 class="display-6 mb-3">🔍 Search for a riddle...</h2>
 
-<h4>Search for a riddle...</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="SearchJokesResults">
+    <div class="row">
+        <div class="col-md-6 col-lg-5">
+            <form asp-action="SearchJokesResults" method="get">
+                <div class="input-group mb-3 custom-search">
+                    <input type="text"
+                           name="SearchPhrase"
+                           class="form-control form-control-lg border-primary"
+                           placeholder="Type a word (e.g., 'shadow', 'river')..."
+                           aria-label="Search Phrase"
+                           required>
 
-            <div class="form-group">
-                <label for="SearchPhrase" class="control-label"></label>
-                <input name="SearchPhrase" class="form-control" />
+                    <button class="btn btn-primary btn-lg px-4" type="submit">
+                        Search
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-2">
+                <a asp-action="Index" class="text-decoration-none text-muted small">
+                    <i class="bi bi-arrow-left"></i>❮❮ Back to All Riddles
+                </a>
             </div>
-
-            <div class="form-group">
-                <input type="submit" value="Search" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
