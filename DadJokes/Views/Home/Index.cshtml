@@ -24,4 +24,30 @@
     </a>
 </div>
 
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+
+                // Configure the pop-up
+                toastr.options = {
+                        "closeButton": true,
+                        "progressBar": true,
+                        "positionClass": "toast-top-left",
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "100000",       // 10 seconds total
+                        "extendedTimeOut": "50000", // Extra 5 seconds IF they hover and then move away
+                        "tapToDismiss": false,    // Prevents accidental clicks from closing it
+                        "preventDuplicates": true
+                };
+
+                // Show the message
+                toastr.info("The database(All riddles) takes about 30 sec to wake up. Your first request might take a few extra seconds.");
+                toastr.info("Account creation temporarily disabled, logging in should work fine.");
+            
+        });
+    </script>
+}
+
 
